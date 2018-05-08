@@ -1,6 +1,9 @@
 body{
   padding-bottom: 50px;
 }
+.hidden {
+  display: none !important;
+}
 #quotes h4{
 }
 nav.navbar{
