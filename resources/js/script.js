@@ -5,23 +5,22 @@ $(document).ready(function() {
   var allQuots = [];
   $.getJSON("resources/json/quotes.json", function(data) {
     for (var hosts in data) {
-      $("#quotes").append("<h3 class='col-xs-12'>" + data[hosts].person + "</h3>");
+      $("#quotes").append("<h3 class='host-name col-12'>" + data[hosts].person + "</h3>");
       for (var quotes in data[hosts].quotes){
-        $("#quotes").append("<p class='col-xs-12'>" + data[hosts].quotes[quotes].quote + "</p>");
-        allQuots.push(data[hosts].quotes[quotes].quote);
+        var theQuote = "<p class'col-12'>" + data[hosts].quotes[quotes].quote + "</p>";
+        //$("#quotes").append("<div class='quote-div'><p class='quote-text col-12 col-md-12'>" + data[hosts].quotes[quotes].quote + "</p>");
+        //$("#quotes").append('<div class="btn-group col-10 offset-1 col-md-4 offset-md-4" role="group" aria-label="choose host"><button type="button" class="col-sm btn btn-dark">Carl</button><button type="button" class="col-sm btn btn-dark">Marcus</button></div>');
+        //$("#quotes").append('<button type="button" class="col-6 btn btn-primary">Carl</button>');
+        //$("#quotes").append('<button type="button" class="col-6 btn btn-primary">Marcus</button></div>');
+        allQuots.push(theQuote);
       }
+      //$("#quotes").append("");
     }
   });
-});
-
-/*---
-for (var courses in data) {
-  $("section").append("<p class='programme'>" + data[courses].programme + "</p><div id='" + data[courses].programmecode + "' class='programmediv style" + colornumber + "'>");
-  for (var course in data[courses].courses) {
-    $("#" + data[courses].programmecode).append("<p class='course " + data[courses].courses[course].coursecode + "'>" + data[courses].courses[course].course + "</p>");
-    for (var book in data[courses].courses[course].coursebook) {
-      $("." + data[courses].courses[course].coursecode).after("<a class='name' target='_blank' style='display: none;' href='" + data[courses].courses[course].coursebook[book].link + "'>" + data[courses].courses[course].coursebook[book].name + "</a><br style='display: none;'>");
-    }
+  alert(allQuots.length);
+  var texten = "";
+  for (i = 0; i < allQuots.length; i++) {
+    texten += "<p class='col-12'>" + allQuots[i] + "</p>";
   }
-}
----*/
+  $("#quotes").append(texten);
+});
