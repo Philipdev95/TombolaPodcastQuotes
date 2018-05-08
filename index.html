@@ -32,8 +32,22 @@
 		</div>
 	</nav>
 	<div class="container">
-		<div id="quotes" class="row"></div>
-		<div id="choice-div" class="row"></div>
+		<div id="question">
+			<div id="quotes" class="row">
+				<p class="quote-text p-3 mt-3"></p>
+			</div>
+			<div id="choice-div" class="row">
+				<button id="carl" type="button" class="person col-4 offset-1 btn btn-outline-dark">CARL</button>
+				<button id="marcus" type="button" class="person col-4 offset-1 btn btn-outline-dark">MARCUS</button>
+			</div>
+		</div>
+		<div id="answer" class="hidden">
+			<div id="correct-answer" class="hidden">Det var rätt! Bra jobbat mr Williams</div>
+			<div id="wrong-answer" class="hidden">Det var inte alls rätt! Alltså fel...</div>
+		</div>
+		<div id="next-div" class="hidden row">
+			<button id="next" type="button" class="col-4 offset-1 btn btn-outline-dark">NÄSTA</button>
+		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
