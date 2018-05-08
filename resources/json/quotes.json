@@ -1,16 +1,16 @@
 { 
-	"carl": {
-		"quotes": [
-			{"quote": "Jamen, det har min mamma alltid sagt!"},
-			{"quote": "Ge oss pengar på patreon nu för fan!"},
-			{"quote": "Snälla bli patreon!"}
-		]
-	},
-	"marcus": {
-		"quotes": [
-			{"quote": "Har du döpt sköldpaddan till Jerry Williams?"},
-			{"quote": "WAAAOOW, hans mamma är från Americat!"},
-			{"quote": "I Mölndal finns sveriges godaste räckmacka!"}
-		]
-	}
+  "carl": {
+    "quotes": [
+      {"quote": "Jamen, det har min mamma alltid sagt!"},
+      {"quote": "Ge oss pengar på patreon nu för fan!"},
+      {"quote": "Snälla bli patreon!"}
+    ]
+  },
+  "marcus": {
+    "quotes": [
+      {"quote": "Har du döpt sköldpaddan till Jerry Williams?"},
+      {"quote": "WAAAOOW, hans mamma är från Americat!"},
+      {"quote": "I Mölndal finns sveriges godaste räckmacka!"}
+    ]
+  }
 }
