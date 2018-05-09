@@ -12,7 +12,28 @@ function getQuote(name){
   }
 }
 /*-----------------*/
+function printPoints(){
+  //function to print stored points
+  $("#display-points").html(localStorage.getItem("storedPoints"));
+}
+/*-----------------*/
+function addPoints(){
+  //checking if there are saved points in storage
+  var storedPoints = parseInt(localStorage.getItem("storedPoints"));
+  if ($.isNumeric(storedPoints) == false){
+    storedPoints = 1;
+    localStorage.setItem("storedPoints", storedPoints);
+  } else {
+    //get storedPoints and add too them.
+    storedPoints++;
+    localStorage.setItem("storedPoints", storedPoints);
+  }
+  console.log(storedPoints);
+  printPoints();
+}
+/*-----------------*/
 function getPerson(){
+  //choosing from who you get the quote
   //if 1 choose carl
   if (Math.floor((Math.random() * 2))) {
     return "carl";
@@ -26,12 +47,14 @@ function printQuote(){
 }
 /*-----------------*/
 function presentAnswer(guess){
+  //remove question and show result(right vs wrong)
   $("#question").addClass("hidden");
   $("#answer").removeClass("hidden");
   $("#next-div").removeClass("hidden");
 
   if (guess === activeQuote.name) {
     $("#correct-answer").removeClass("hidden");
+    addPoints();
   } else {
     $("#wrong-answer").removeClass("hidden");
   }
@@ -55,7 +78,7 @@ function newQuote() {
 function startGame(){
   //print new quote
   newQuote();
-
+  printPoints();
   //handler
   $("#choice-div").click(function(event) {
     if (event.target.classList.contains("person")) {
@@ -64,6 +87,13 @@ function startGame(){
   });
 
   $("#next").click(function() {
+    newQuote();
+  });
+  $("#clear-points").click(function() {
+    //remove all saved data in localstorage
+    localStorage.clear();
+    //print new score (0)
+    printPoints();
     newQuote();
   });
 }

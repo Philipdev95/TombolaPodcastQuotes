@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light navbar-dark">
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-dark">
 		<a class="navbar-brand" href="#">
 			<img src="resources/img/logo1.png" height="40px" alt="logo">
 		</a>
@@ -25,28 +25,31 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link active" href="/#">Spela <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link active" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="/#">Spela <span class="sr-only">(current)</span></a>
 				<a class="nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">Tombola Facebook</a>
 				<a class="nav-item nav-link" href="https://www.patreon.com/tombola/posts">Tombola Patreon</a>
+				<div class="dropdown-divider"></div>
+				<button id="clear-points" type="button" class="col-10 offset-1 btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT POÄNG</button>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
 		<div id="question">
 			<div id="quotes" class="row">
-				<p class="quote-text p-3 mt-3"></p>
+				<p class="col-12 text-center quote-text p-3 mt-3"></p>
 			</div>
 			<div id="choice-div" class="row">
 				<button id="carl" type="button" class="person col-4 offset-1 btn btn-outline-dark">CARL</button>
-				<button id="marcus" type="button" class="person col-4 offset-1 btn btn-outline-dark">MARCUS</button>
+				<p id="display-points" class="col-2">0</p>
+				<button id="marcus" type="button" class="person col-4 btn btn-outline-dark">MARCUS</button>
 			</div>
 		</div>
 		<div id="answer" class="hidden">
-			<div id="correct-answer" class="hidden">Det var rätt! Bra jobbat mr Williams</div>
-			<div id="wrong-answer" class="hidden">Det var inte alls rätt! Alltså fel...</div>
+			<div id="correct-answer" class="lead col-12 text-center p-3 mt-3 hidden">Det var rätt! Bra jobbat mr Williams</div>
+			<div id="wrong-answer" class="lead col-12 text-center p-3 mt-3 hidden">Det var inte alls rätt! Alltså fel...</div>
 		</div>
 		<div id="next-div" class="hidden row">
-			<button id="next" type="button" class="col-4 offset-1 btn btn-outline-dark">NÄSTA</button>
+			<button id="next" type="button" class="btn-mg col-4 offset-4 btn btn-outline-dark">NÄSTA</button>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
