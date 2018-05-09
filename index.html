@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,900i" rel="stylesheet">
 	<link id="mainstyle" type="text/css" rel="stylesheet" href="resources/css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 	<link rel="shortcut icon" type="image/png" href="#">
 	<link rel="apple-touch-icon" href="#">
 	<title>Tombola Podcast Citat Spel</title>
@@ -26,10 +27,23 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link active" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="/#">Spela <span class="sr-only">(current)</span></a>
-				<a class="nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">Tombola Facebook</a>
-				<a class="nav-item nav-link" href="https://www.patreon.com/tombola/posts">Tombola Patreon</a>
+				<a class="nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">
+					<div>
+						<i class="fab fa-facebook-square" style="color:#3B5998"></i> Tombola Grupp
+					</div>
+				</a>
+				<a class="nav-item nav-link" href="https://www.facebook.com/groups/160368417829277/">
+					<div>
+						<i class="fab fa-facebook-square" style="color:#3B5998"></i> Tombola Patreons Grupp
+					</div>
+				</a>
+				<a class="nav-item nav-link" href="https://www.patreon.com/tombola/posts">
+					<div>
+						<i class="fab fa-patreon" style="color:#f96854"></i> Tombola Patreon
+					</div>
+				</a>
 				<div class="dropdown-divider"></div>
-				<button id="clear-points" type="button" class="col-10 offset-1 btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT POÄNG</button>
+				<button id="clear-points" type="button" class="col-10 offset-1 btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT DIN DATA</button>
 			</div>
 		</div>
 	</nav>
@@ -45,8 +59,8 @@
 			</div>
 		</div>
 		<div id="answer" class="hidden">
-			<div id="correct-answer" class="lead col-12 text-center p-3 mt-3 hidden">Det var rätt! Bra jobbat mr Williams</div>
-			<div id="wrong-answer" class="lead col-12 text-center p-3 mt-3 hidden">Det var inte alls rätt! Alltså fel...</div>
+			<div id="correct-answer" class="lead col-12 text-center p-3 mt-3 hidden text-success">Det var rätt! Bra jobbat mr Williams</div>
+			<div id="wrong-answer" class="lead col-12 text-center p-3 mt-3 hidden text-danger">Det var inte alls rätt! Alltså fel...</div>
 		</div>
 		<div id="next-div" class="hidden row">
 			<button id="next" type="button" class="btn-mg col-4 offset-4 btn btn-outline-dark">NÄSTA</button>
