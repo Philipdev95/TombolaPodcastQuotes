@@ -1,7 +1,14 @@
 {
   "carl": {
     "quotes": [
-      {"quote": "Jamen, det har min mamma alltid sagt!"},
+      {"quote": "Jag höll ju på med cross-fit en gång i tiden."},
+      {"quote": "Det är väldigt jantigt i värmland!"},
+      {"quote": "Hålfotsinlägg är grunden till att vi aldrig kommer bota cancer eller lösa miljöproblem."},
+      {"quote": "Tack Ella, du är ett föredömme för resten av världen!"},
+      {"quote": "Du vet, jag är ju inte så glad i O'boy som folk tror."},
+      {"quote": "Rulla vinjett era jävla bögar!"},
+      {"quote": "Det är inte, och kommer aldrig att bli en mänsklig rättighet att låsa in kossor och klämma mjölk ur pattarna på dem varenda dag, bara för att din hustru-misshandlande farfar gjorde det!"},
+      {"quote": "Jag tror att alla blonda människor älskar mjölk. Det är en känsla jag har."},
       {"quote": "Ge oss pengar på patreon nu för fan!"},
       {"quote": "Snälla bli patreon!"},
       {"quote": "Skryt skryt skryt!"}
@@ -9,9 +16,14 @@
   },
   "marcus": {
     "quotes": [
+      {"quote": "Jag har alltid trott att ett marsipan är typ ett grundämne."},
+      {"quote": "En tombola är en sån här snurra-runt manick."},
+      {"quote": "Han fingerpullar ju giraffer för att han tycker det är skoj."},
+      {"quote": "Men är det för att han är så fantastisk, karismatisk och sexig, eller är din mamma bara lite slampig?"},
+      {"quote": "Är vi på särskolan Storken i Haninge och övar på uttal med en grupp sexåriga dalmatiner, eller vad är det frågan om?"},
       {"quote": "Har du döpt sköldpaddan till Jerry Williams?"},
       {"quote": "WAAAOOW, hans mamma är från Americat!"},
-      {"quote": "I Mölndal finns sveriges godaste räckmacka!"}
+      {"quote": "I Mölndal finns sveriges godaste räckmacka."}
     ]
   }
 }
