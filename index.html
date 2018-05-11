@@ -59,36 +59,41 @@
 				<button id="marcus" type="button" class="person col-4 btn btn-outline-dark">MARCUS</button>
 			</div>
 		</div>
-		<div id="answer" class="hidden">
+		<div id="answer" class="row hidden">
 			<div id="correct-answer" class="lead col-12 text-center p-3 mt-3 hidden text-success">Det var rätt! Bra jobbat mr Williams</div>
-			<!--<div id="wrong-answer" class="lead col-12 text-center p-3 mt-3 hidden text-danger">Det var inte alls rätt! Alltså fel...</div>-->		</div>
-		<div id="next-div" class="hidden row">
+			<!--<div id="wrong-answer" class="lead col-12 text-center p-3 mt-3 hidden text-danger">Det var inte alls rätt! Alltså fel...</div>-->
+		</div>
+		<div id="next-div" class="row hidden">
 			<button id="next" type="button" class="btn-mg col-4 offset-4 btn btn-outline-dark">NÄSTA</button>
     </div>
-    <div id="end" class="hidden">
+    <div id="end" class="row text-center">
       <div id="wrong-answer" class="lead col-12 text-center p-3 mt-3 text-danger">Det var inte alls rätt! Alltså fel...</div>
       <div id="total-points" class="lead col-12 text-center">Du fick ihop <span></span> rätt!</div>
-      <form id="add-form">
-        <input pattern=".{3,30}" title="Mellan 3-30 tecken" required type="text" placeholder="Namn"/>
-        <button id="submit-highscore" type="submit" class="btn-mg col-4 offset-4 btn btn-outline-dark">LÄGG TILL I TOPPLISTAN</button>
+			<form id="add-form" class="col-12 hidden">
+				<div class="col-12 form-group">
+					<input class="col-6 offset-3 form-control" pattern=".{3,30}" title="Mellan 3-30 tecken" required type="text" placeholder="Namn"/>
+	        <button id="submit-highscore" type="submit" class="btn-mg btn btn-outline-dark">LÄGG TILL I TOPPLISTAN</button>
+				</div>
       </form>
-      <h3>Topplista</h3>
-      <div id="toplist">
-		<ul>
-			<li id="toplist-0"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-1"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-2"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-3"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-4"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-5"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-6"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-7"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-8"><span class="name"></span><span class="points"></span></li>
-			<li id="toplist-9"><span class="name"></span><span class="points"></span></li>
-		</ul>
+      <h3 class="col-12">Topplista</h3>
+      <div id="toplist" class="col-12">
+				<ul class="col-12 list-group list-group-flush">
+					<li id="toplist-0" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-1" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-2" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-3" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-4" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-5" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-6" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-7" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-8" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+					<li id="toplist-9" class="list-group-item"><span class="col name"></span><span class="col points"></span></li>
+				</ul>
       </div>
-      <button id="start-new" type="button" class="btn-mg col-4 offset-4 btn btn-outline-dark">SPELA IGEN</button>
-    </div>
+			<div class="col-12">
+      	<button id="start-new" type="button" class="btn-mg btn btn-outline-dark">SPELA IGEN</button>
+			</div>
+		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
