@@ -4,5 +4,6 @@ This is a demo for a small web-based game, created around quotes from the creato
 Save a toplist of players
 Display toplist of players
 ### NICE TO HAVE LIST
-Show different correct/wrong comments/answers
+Show different correct/wrong
+Add comments/answers
 #### Created by the listeners, for the listeners
