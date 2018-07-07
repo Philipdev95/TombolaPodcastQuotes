@@ -14,6 +14,36 @@ function sortHighScore(newScore) {
   highscore = highscore.slice(0, 10);
   printHighscore();
 }
+function getAllQuotes(){
+  $.getJSON("../resources/json/quotes.json", function(data) {
+    var cQuotes = data.carl.quotes;
+    var i = 0;
+    while (i < cQuotes.length){
+      //console.log(cQuotes[i]);
+      $("#quotesCarl").append("<p>" + cQuotes[i].quote + "</p>");
+      i++;
+    }
+    var mQuotes = data.marcus.quotes;
+    var x = 0;
+    while (x < mQuotes.length){
+      //console.log(mQuotes[x]);
+      $(".quotesMarcus").append("<p>" + mQuotes[x].quote + "</p>");
+      x++;
+    }
+  });
+}
+/*
+function getAllQuotes(){
+  var Cquotes = allQuotes["carl"]["quotes"];
+  var Mquotes = allQuotes["marcus"]["quotes"];
+  $(".quotesCarl").append(Cquotes);
+  $(".quotesMarcus").append(Mquotes);
+}
+
+/*------*/
+$("#allQuotes").click(function(){
+  getAllQuotes();
+});
 /*-----------------*/
 function getQuote(name){
   var quotes = allQuotes[name]["quotes"];
