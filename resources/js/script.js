@@ -18,14 +18,14 @@ let firstGame = true;
 function sortHighScore(newScore) {
   highscore.push(newScore);
 
-  highscore = highscore.sort(function(obj1, obj2) {
+  highscore = highscore.sort((obj1, obj2) => {
     return obj2.points - obj1.points;
   });
   highscore = highscore.slice(0, 10);
   printHighscore();
 }
 function getAllQuotes(){
-  $.getJSON("../json/quotes.json", function(data) {
+  $.getJSON("../json/quotes.json", data => {
     const cQuotes = data.carl.quotes;
     let i = 0;
     while (i < cQuotes.length){
@@ -59,7 +59,7 @@ function getAllQuotes(){
 }q
 
 /*------*/
-$("#allQuotes").click(function(){
+$("#allQuotes").click(() => {
   getAllQuotes();
 });
 /*-----------------*/
@@ -143,13 +143,13 @@ function startGame(){
 
   if (firstGame) {
     //handler
-    $("#choice-div").click(function(event) {
+    $("#choice-div").click(event => {
       if (event.target.classList.contains("person")) {
         presentAnswer(event.target.getAttribute("id"));
       }
     });
 
-    $("#next").click(function() {
+    $("#next").click(() => {
       newQuote();
     });
 
@@ -189,16 +189,16 @@ function printHighscore() {
   });
 }
 /*-----------------*/
-$(document).ready(function() {
+$(document).ready(() => {
   //get quotes
-  $.getJSON("../resources/json/quotes.json", function(quotes) {
-    $.getJSON("../resources/json/config.json", function(config) {
+  $.getJSON("../resources/json/quotes.json", quotes => {
+    $.getJSON("../resources/json/config.json", config => {
       // Initialize Firebase
       firebase.initializeApp(config);
 
       dbRef = firebase.database();
 
-      dbRef.ref("toplist").on("child_added", function(snapshot) {
+      dbRef.ref("toplist").on("child_added", snapshot => {
         sortHighScore(snapshot.val());
       });
 
@@ -207,7 +207,7 @@ $(document).ready(function() {
     });
   });
 
-  $("#clear-points").click(function() {
+  $("#clear-points").click(() => {
     //remove all saved data in localstorage
     localStorage.clear();
     //print new score (0)
@@ -215,13 +215,13 @@ $(document).ready(function() {
     newQuote();
   });
 
-  $("#add-form").submit(function(e){
+  $("#add-form").submit(e => {
     //prevent refresh
     e.preventDefault();
     saveHighscore();
   });
 
-  $("#start-new").click(function() {
+  $("#start-new").click(() => {
     startGame();
   });
 });
@@ -291,7 +291,7 @@ function getXML(feedUrl) {
       const XMLisJSON = xmlToJson(response);
       const titles = XMLisJSON.rss.channel.item.reverse();
       let lastTitle;
-      $.each(titles, function (index, title) {
+      $.each(titles, (index, title) => {
         if (ssArr === undefined) {
           $('.status-message').html('Något gick fel. Pröva att ladda om sidan. <button class="btn btn-sm" onClick="history.go(0);">Refresh Page</button>');
           return false;
@@ -321,7 +321,7 @@ function getXML(feedUrl) {
             quotes = gs_showQuotes.split(';');
             let item;
             let allQuotes = '';
-            $.each(quotes, function (i, quote) {
+            $.each(quotes, (i, quote) => {
               if (i === 0) {
                 item = '<div class="carousel-item active" data-interval="4000">' + quote + '</div>';
               } else {
