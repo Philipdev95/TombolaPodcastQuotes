@@ -269,8 +269,12 @@ function xmlToJson(xml) {
 	return obj;
 }
 function getXML(feedUrl) {
-  var ssArr;
-  var url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgkUq7i7Lz9yxAgpQQ84LdH3gB5_H23231r20_DxkeVK3jwYXN_-yGVXHwYv4ARz2qNU3Yga_T1qgv/pub?output=csv';
+  var ssArr, url;
+  if (window.IS_DEV) {
+    url = `${window.origin}/resources/mock/episodes-response.txt`;
+  } else {
+    url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgkUq7i7Lz9yxAgpQQ84LdH3gB5_H23231r20_DxkeVK3jwYXN_-yGVXHwYv4ARz2qNU3Yga_T1qgv/pub?output=csv';
+  }
   $.ajax({
     url: url,
     success: function (data) {
