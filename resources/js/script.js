@@ -15,22 +15,30 @@ function sortHighScore(newScore) {
   printHighscore();
 }
 function getAllQuotes(){
-  $.getJSON("../resources/json/quotes.json", function(data) {
+  $.getJSON("../json/quotes.json", function(data) {
     var cQuotes = data.carl.quotes;
     var i = 0;
     while (i < cQuotes.length){
-      //console.log(cQuotes[i]);
       $("#quotesCarl").append("<p>" + cQuotes[i].quote + "</p>");
       i++;
     }
     var mQuotes = data.marcus.quotes;
     var x = 0;
     while (x < mQuotes.length){
-      //console.log(mQuotes[x]);
       $(".quotesMarcus").append("<p>" + mQuotes[x].quote + "</p>");
       x++;
     }
   });
+}
+
+function getTwoDigits (number) {
+  var newNumber;
+  if (number < 10) {
+    newNumber = '0' + number;
+    return newNumber;
+  } else {
+    return number;
+  }
 }
 /*
 function getAllQuotes(){
@@ -38,7 +46,7 @@ function getAllQuotes(){
   var Mquotes = allQuotes["marcus"]["quotes"];
   $(".quotesCarl").append(Cquotes);
   $(".quotesMarcus").append(Mquotes);
-}
+}q
 
 /*------*/
 $("#allQuotes").click(function(){
@@ -174,8 +182,8 @@ function printHighscore() {
 /*-----------------*/
 $(document).ready(function() {
   //get quotes
-  $.getJSON("resources/json/quotes.json", function(quotes) {
-    $.getJSON("resources/json/config.json", function(config) {
+  $.getJSON("../resources/json/quotes.json", function(quotes) {
+    $.getJSON("../resources/json/config.json", function(config) {
       // Initialize Firebase
       firebase.initializeApp(config);
 
@@ -208,3 +216,176 @@ $(document).ready(function() {
     startGame();
   });
 });
+
+function xmlToJson(xml) {
+
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	// If just one text node inside
+	if (xml.hasChildNodes() && xml.childNodes.length === 1 && xml.childNodes[0].nodeType === 3) {
+		obj = xml.childNodes[0].nodeValue;
+	}
+	else if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+}
+function getXML(feedUrl) {
+  var ssArr;
+  var url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgkUq7i7Lz9yxAgpQQ84LdH3gB5_H23231r20_DxkeVK3jwYXN_-yGVXHwYv4ARz2qNU3Yga_T1qgv/pub?output=csv';
+  $.ajax({
+    url: url,
+    success: function (data) {
+      ssArr = data.split("\n");
+    }
+  });
+  $.ajax({
+    type: "GET",
+    url: feedUrl,
+    dataType: "xml",
+    error: function (response) {
+      console.log('Error: There was a problem processing your request, please refresh the browser and try again');
+    },
+    success: function (response) {
+      var XMLisJSON = xmlToJson(response);
+      var titles = XMLisJSON.rss.channel.item.reverse();
+      var lastTitle;
+      $.each(titles, function (index, title) {
+        if (ssArr === undefined) {
+          $('.status-message').html('Något gick fel. Pröva att ladda om sidan. <button class="btn btn-sm" onClick="history.go(0);">Refresh Page</button>');
+          return false;
+        } else {
+          $('.status-message').html('');
+        }
+        var item = ssArr[index].split(',');
+        var excelTitle;
+        var showNotes = '';
+        var skojPoints = '';
+        var carousel = '';
+        var gs_showRated = item[3];
+        var gs_showNotes = item[4];
+        var gs_showQuotes = item[5];
+        if (index === 13 || index === 17 || index === 18 || index === 100) {
+          excelTitle = item[2];
+        } else if (index === 70) {
+          excelTitle = item[1] + ' ' + item[2];
+        } else if (index === 78) {
+          excelTitle = '78. Janne "Loffe" Carlsson hyllningsavsnitt';
+        } else {
+        excelTitle = item[1] + '. ' + item[2];
+        }
+        excelTitleCheck = excelTitle.replace(/ /g, '');
+        itunestitleCheck = title.title.replace(/ /g, '');
+        if (index !== 0) {
+          if (item[4] !== '') {
+            showNotes = '<hr class="m-1"><i class="show-notes text-muted">' + gs_showNotes + '</i>';
+          }
+          if (gs_showRated !== '') {
+            var colorClass;
+            if (gs_showRated < 50) {colorClass = 'bg-warning';} else if (gs_showRated >= 50 && gs_showRated < 100) {colorClass = 'bg-success';} else if (gs_showRated === 100) {colorClass = 'bg-info';}
+            skojPoints = '<hr class="m-1"><div class="progress"><div class="progress-bar ' + colorClass + '" role="progressbar" style="width: ' + gs_showRated + '%;" aria-valuenow="' + gs_showRated + '" aria-valuemin="0" aria-valuemax="100">Skojfaktor: ' + gs_showRated + '</div></div>';
+          }
+          if (gs_showQuotes !== '') {
+            var quotes;
+            var prev = '';
+            var next = '';
+            quotes = gs_showQuotes.split(';');
+            var item;
+            var allQuotes = '';
+            $.each(quotes, function (i, quote) {
+              if (i === 0) {
+                item = '<div class="carousel-item active" data-interval="4000">' + quote + '</div>';
+              } else {
+                item = '<div class="carousel-item" data-interval="4000">' + quote + '</div>';
+                prev = '<a class="carousel-control-prev" href="#quoteCarousel' + index + '" role="button" data-slide="prev"><i class="text-dark far fa-chevron-left"></i><span class="sr-only">Previous</span></a>';
+                next = '<a class="carousel-control-next" href="#quoteCarousel' + index + '" role="button" data-slide="next"><i class="text-dark far fa-chevron-right"></i><span class="sr-only">Next</span></a>';
+              }
+              allQuotes = allQuotes + item;
+            });
+            var inner = '<div class="carousel-inner">' + allQuotes + '</div>';
+            carousel = '<hr class="m-1"><div id="quoteCarousel' + index + '" class="carousel slide" data-ride="carousel">' + inner + prev + next + '</div>';
+          }
+          var date = new Date(title.pubDate).getFullYear() + '.' + getTwoDigits(new Date(title.pubDate).getMonth() + 1) + '.' + getTwoDigits(new Date(title.pubDate).getDate());
+          var pubDate = title.pubDate;
+          publicDate = pubDate.substring(0, 16);
+          $("#episodeList").prepend('<li href="#" data-index="' + index + '" class="list-group-item list-group-item-action d-block">' +
+          '<a class="d-flex justify-content-between">' +
+          '<span>' + title.title + '</span>' +
+          '<span>' + date + '</span>' + '</a>' + showNotes + skojPoints + carousel +
+          '</li>');
+        }
+        lastTitle = title.title;
+      });
+    }
+  });
+}
+$.ajax({
+  type: 'post',
+  url: 'https://itunes.apple.com/lookup?id=1095020110&entity=podcast',
+  cache: false,
+  success: function(results) {
+    var data = JSON.parse(results);
+    getXML(data.results[0].feedUrl);
+  },
+  error: function(err) {
+    console.log(JSON.parse(err.responseText));
+  }
+});
+
+function filterFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue, searchFieldSelectVal;
+  input = document.getElementById('searchInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("episodeList");
+  li = ul.getElementsByTagName('li');
+  searchFieldSelectVal = document.getElementById('search-field-select').value;
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    if (searchFieldSelectVal === 'episode_title_numb_date') {
+      a = li[i].getElementsByTagName("a")[0];
+    } else if (searchFieldSelectVal === 'episode_comments') {
+      a = li[i].getElementsByClassName("show-notes")[0];
+    }
+    if (a !== undefined) {
+      txtValue = a.textContent || a.innerText;
+    } else {
+      txtValue = '';
+    }
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].classList.add("d-block");
+      li[i].style.display = "";
+    } else {
+      li[i].classList.remove("d-block");
+      li[i].style.display = "none";
+    }
+  }
+}
