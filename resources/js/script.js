@@ -21,33 +21,6 @@ const sortHighScore = newScore => {
   highscore = highscore.slice(0, 10);
 };
 
-const getAllQuotes = () => {
-  let url;
-  if (window.IS_DEV) {
-    url = `${window.origin}/resources/json/quotes.json`;
-  } else {
-    url = '../json/quotes.json';
-  }
-
-  $.getJSON(url, ({carl, marcus}) => {
-    const cQuotes = carl.quotes;
-    let i = 0;
-    while (i < cQuotes.length) {
-      $('#quotesCarl').append(`<p>${cQuotes[i].quote}</p>`);
-      i++;
-    }
-    const mQuotes = marcus.quotes;
-    let x = 0;
-    while (x < mQuotes.length) {
-      $('.quotesMarcus').append(`<p>${mQuotes[x].quote}</p>`);
-      x++;
-    }
-  });
-};
-
-$('#allQuotes').click(() => {
-  getAllQuotes();
-});
 const getQuote = name => {
   const quotes = allQuotes[name].quotes;
   const quote = quotes[Math.floor(Math.random() * quotes.length)];

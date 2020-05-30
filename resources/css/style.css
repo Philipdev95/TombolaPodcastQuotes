@@ -48,6 +48,9 @@ nav.navbar{
 #episode-list{
   padding-left: 15px;
 }
+#quote-container {
+  display: none;
+}
 /* Loading spinner */
 .lds-ripple {
   display: inline-block;
@@ -82,3 +85,5 @@ nav.navbar{
   }
 }
 /* End Loading spinner */
+
+
