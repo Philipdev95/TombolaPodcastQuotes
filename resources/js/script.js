@@ -81,7 +81,7 @@ function printPoints(){
 function addPoints(){
   //checking if there are saved points in storage
   var storedPoints = parseInt(localStorage.getItem("storedPoints"));
-  if ($.isNumeric(storedPoints) == false){
+  if (!$.isNumeric(storedPoints)){
     storedPoints = 1;
     localStorage.setItem("storedPoints", storedPoints);
   } else {
@@ -183,7 +183,6 @@ function saveHighscore() {
 }
 /*-----------------*/
 function printHighscore() {
-  var element;
   highscore.forEach((score,i) => {
     $("#toplist-" + i + " .name").text(score.name);
     $("#toplist-" + i + " .points").text(score.points);
@@ -232,7 +231,7 @@ function xmlToJson(xml) {
 	// Create the return object
 	var obj = {};
 
-	if (xml.nodeType == 1) { // element
+	if (xml.nodeType === 1) { // element
 		// do attributes
 		if (xml.attributes.length > 0) {
 		obj["@attributes"] = {};
@@ -241,7 +240,7 @@ function xmlToJson(xml) {
 				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
 			}
 		}
-	} else if (xml.nodeType == 3) { // text
+	} else if (xml.nodeType === 3) { // text
 		obj = xml.nodeValue;
 	}
 
@@ -285,7 +284,7 @@ function getXML(feedUrl) {
     type: "GET",
     url: feedUrl,
     dataType: "xml",
-    error: function (response) {
+    error: function (_response) {
       console.log('Error: There was a problem processing your request, please refresh the browser and try again');
     },
     success: function (response) {
@@ -300,24 +299,12 @@ function getXML(feedUrl) {
           $('.status-message').html('');
         }
         var item = ssArr[index].split(',');
-        var excelTitle;
         var showNotes = '';
         var skojPoints = '';
         var carousel = '';
         var gs_showRated = item[3];
         var gs_showNotes = item[4];
         var gs_showQuotes = item[5];
-        if (index === 13 || index === 17 || index === 18 || index === 100) {
-          excelTitle = item[2];
-        } else if (index === 70) {
-          excelTitle = item[1] + ' ' + item[2];
-        } else if (index === 78) {
-          excelTitle = '78. Janne "Loffe" Carlsson hyllningsavsnitt';
-        } else {
-        excelTitle = item[1] + '. ' + item[2];
-        }
-        excelTitleCheck = excelTitle.replace(/ /g, '');
-        itunestitleCheck = title.title.replace(/ /g, '');
         if (index !== 0) {
           if (item[4] !== '') {
             showNotes = '<hr class="m-1"><i class="show-notes text-muted">' + gs_showNotes + '</i>';
@@ -348,8 +335,6 @@ function getXML(feedUrl) {
             carousel = '<hr class="m-1"><div id="quoteCarousel' + index + '" class="carousel slide" data-ride="carousel">' + inner + prev + next + '</div>';
           }
           var date = new Date(title.pubDate).getFullYear() + '.' + getTwoDigits(new Date(title.pubDate).getMonth() + 1) + '.' + getTwoDigits(new Date(title.pubDate).getDate());
-          var pubDate = title.pubDate;
-          publicDate = pubDate.substring(0, 16);
           $("#episodeList").prepend('<li href="#" data-index="' + index + '" class="list-group-item list-group-item-action d-block">' +
           '<a class="d-flex justify-content-between">' +
           '<span>' + title.title + '</span>' +
