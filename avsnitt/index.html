@@ -71,6 +71,9 @@
         <input id="searchInput" class="form-control" onkeyup="filterSearch()" type="text" placeholder="Sök..." aria-label="ämne">
       </div>
 			<div class="col-12">
+				<div class="col-xs-1" align="center">
+					<div id="loading-spinner" class="lds-ripple"><div></div><div></div></div>
+				</div>
 				<ul id="episodeList" class="list-group"></ul>
 			</div>
 		</div>
@@ -80,7 +83,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
-  <script src="../resources/js/script.js"></script>
+  <script src="../resources/js/episodeList.js"></script>
 </body>
 
 </html>
