@@ -295,7 +295,7 @@ const getXML = feedUrl => {
       const XMLisJSON = xmlToJson(response);
       const titles = XMLisJSON.rss.channel.item.reverse();
       $.each(titles, (index, title) => {
-        let statusMsg = $('.status-message');
+        const statusMsg = $('.status-message');
 
         if (ssArr === undefined) {
           statusMsg.html('Något gick fel. Pröva att ladda om sidan. <button class="btn btn-sm" onClick="history.go(0);">Refresh Page</button>');
@@ -360,31 +360,27 @@ $.ajax({
 });
 
 const filterSearch = () => {
-  // Declare variables
-  let a; let txtValue;
-  const input = document.getElementById('searchInput');
-  const filter = input.value.toUpperCase();
-  const ul = document.getElementById('episodeList');
-  const li = ul.getElementsByTagName('li');
-  const searchFieldSelectVal = document.getElementById('search-field-select').value;
+  let episodeMatch; let match;
+  const filterValue = document.getElementById('searchInput').value;
+  const episodes = document.getElementById('episodeList').getElementsByTagName('li');
+  const searchFilterType = document.getElementById('search-field-select').value;
+
   // Loop through all list items, and hide those who don't match the search query
-  for (let i = 0; i < li.length; i++) {
-    if (searchFieldSelectVal === 'episode_title_numb_date') {
-      a = li[i].getElementsByTagName('a')[0];
-    } else if (searchFieldSelectVal === 'episode_comments') {
-      a = li[i].getElementsByClassName('show-notes')[0];
+  for (let i = 0; i < episodes.length; i++) {
+    if (searchFilterType === 'episode_title_numb_date') {
+      episodeMatch = episodes[i].getElementsByTagName('a')[0];
+    } else if (searchFilterType === 'episode_comments') {
+      episodeMatch = episodes[i].getElementsByClassName('show-notes')[0];
     }
-    if (a !== undefined) {
-      txtValue = a.textContent || a.innerText;
-    } else {
-      txtValue = '';
+    if (!!episodeMatch) {
+      match = episodeMatch.textContent || episodeMatch.innerText || '';
     }
-    if (txtValue.toUpperCase().includes(filter)) {
-      li[i].classList.add('d-block');
-      li[i].style.display = '';
+    if (match.toUpperCase().includes(filterValue.toUpperCase())) {
+      episodes[i].classList.add('d-block');
+      episodes[i].style.display = '';
     } else {
-      li[i].classList.remove('d-block');
-      li[i].style.display = 'none';
+      episodes[i].classList.remove('d-block');
+      episodes[i].style.display = 'none';
     }
   }
 };
