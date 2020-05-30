@@ -8,11 +8,11 @@ if (window.IS_DEV) {
       ' 15px 15px 0 rgb(2,135,206), 18px 18px 0 rgb(4,77,145), 21px 21px 0 rgb(42,21,113)');
 }
 
-var allQuotes = {};
-var activeQuote = {};
-var dbRef;
-var highscore = [];
-var firstGame = true;
+let allQuotes = {};
+let activeQuote = {};
+let dbRef;
+let highscore = [];
+let firstGame = true;
 
 /*-----------------*/
 function sortHighScore(newScore) {
@@ -26,14 +26,14 @@ function sortHighScore(newScore) {
 }
 function getAllQuotes(){
   $.getJSON("../json/quotes.json", function(data) {
-    var cQuotes = data.carl.quotes;
-    var i = 0;
+    const cQuotes = data.carl.quotes;
+    let i = 0;
     while (i < cQuotes.length){
       $("#quotesCarl").append("<p>" + cQuotes[i].quote + "</p>");
       i++;
     }
-    var mQuotes = data.marcus.quotes;
-    var x = 0;
+    const mQuotes = data.marcus.quotes;
+    let x = 0;
     while (x < mQuotes.length){
       $(".quotesMarcus").append("<p>" + mQuotes[x].quote + "</p>");
       x++;
@@ -42,7 +42,7 @@ function getAllQuotes(){
 }
 
 function getTwoDigits (number) {
-  var newNumber;
+  let newNumber;
   if (number < 10) {
     newNumber = '0' + number;
     return newNumber;
@@ -64,8 +64,8 @@ $("#allQuotes").click(function(){
 });
 /*-----------------*/
 function getQuote(name){
-  var quotes = allQuotes[name]["quotes"];
-  var quote = quotes[Math.floor(Math.random() * quotes.length)];
+  const quotes = allQuotes[name]["quotes"];
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
   activeQuote = {
     name: name,
@@ -80,7 +80,7 @@ function printPoints(){
 /*-----------------*/
 function addPoints(){
   //checking if there are saved points in storage
-  var storedPoints = parseInt(localStorage.getItem("storedPoints"));
+  let storedPoints = parseInt(localStorage.getItem("storedPoints"));
   if (!$.isNumeric(storedPoints)){
     storedPoints = 1;
     localStorage.setItem("storedPoints", storedPoints);
@@ -164,7 +164,7 @@ function endGame(){
   $("#end").removeClass("hidden");
   $("#add-form").removeClass("hidden");
 
-  var storedPoints = parseInt(localStorage.getItem("storedPoints"));
+  const storedPoints = parseInt(localStorage.getItem("storedPoints"));
   if ($.isNumeric(storedPoints)){
     $("#total-points span").text(storedPoints);
   }
@@ -173,8 +173,8 @@ function endGame(){
 function saveHighscore() {
   $("#add-form").addClass("hidden");
 
-  var storedPoints = parseInt(localStorage.getItem("storedPoints"));
-  var name = $("#add-form input").val();
+  const storedPoints = parseInt(localStorage.getItem("storedPoints"));
+  const name = $("#add-form input").val();
 
   if ($.isNumeric(storedPoints)){
     dbRef.ref("toplist/" + Date.now()).set({name: name, points: storedPoints});
@@ -229,14 +229,14 @@ $(document).ready(function() {
 function xmlToJson(xml) {
 
 	// Create the return object
-	var obj = {};
+	let obj = {};
 
 	if (xml.nodeType === 1) { // element
 		// do attributes
 		if (xml.attributes.length > 0) {
 		obj["@attributes"] = {};
-			for (var j = 0; j < xml.attributes.length; j++) {
-				var attribute = xml.attributes.item(j);
+			for (let j = 0; j < xml.attributes.length; j++) {
+				const attribute = xml.attributes.item(j);
 				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
 			}
 		}
@@ -250,14 +250,14 @@ function xmlToJson(xml) {
 		obj = xml.childNodes[0].nodeValue;
 	}
 	else if (xml.hasChildNodes()) {
-		for(var i = 0; i < xml.childNodes.length; i++) {
-			var item = xml.childNodes.item(i);
-			var nodeName = item.nodeName;
+		for(let i = 0; i < xml.childNodes.length; i++) {
+			const item = xml.childNodes.item(i);
+			const nodeName = item.nodeName;
 			if (typeof(obj[nodeName]) == "undefined") {
 				obj[nodeName] = xmlToJson(item);
 			} else {
 				if (typeof(obj[nodeName].push) == "undefined") {
-					var old = obj[nodeName];
+					const old = obj[nodeName];
 					obj[nodeName] = [];
 					obj[nodeName].push(old);
 				}
@@ -268,7 +268,7 @@ function xmlToJson(xml) {
 	return obj;
 }
 function getXML(feedUrl) {
-  var ssArr, url;
+  let ssArr, url;
   if (window.IS_DEV) {
     url = `${window.origin}/resources/mock/episodes-response.txt`;
   } else {
@@ -288,9 +288,9 @@ function getXML(feedUrl) {
       console.log('Error: There was a problem processing your request, please refresh the browser and try again');
     },
     success: function (response) {
-      var XMLisJSON = xmlToJson(response);
-      var titles = XMLisJSON.rss.channel.item.reverse();
-      var lastTitle;
+      const XMLisJSON = xmlToJson(response);
+      const titles = XMLisJSON.rss.channel.item.reverse();
+      let lastTitle;
       $.each(titles, function (index, title) {
         if (ssArr === undefined) {
           $('.status-message').html('Något gick fel. Pröva att ladda om sidan. <button class="btn btn-sm" onClick="history.go(0);">Refresh Page</button>');
@@ -298,29 +298,29 @@ function getXML(feedUrl) {
         } else {
           $('.status-message').html('');
         }
-        var item = ssArr[index].split(',');
-        var showNotes = '';
-        var skojPoints = '';
-        var carousel = '';
-        var gs_showRated = item[3];
-        var gs_showNotes = item[4];
-        var gs_showQuotes = item[5];
+        let item = ssArr[index].split(',');
+        let showNotes = '';
+        let skojPoints = '';
+        let carousel = '';
+        const gs_showRated = item[3];
+        const gs_showNotes = item[4];
+        const gs_showQuotes = item[5];
         if (index !== 0) {
           if (item[4] !== '') {
             showNotes = '<hr class="m-1"><i class="show-notes text-muted">' + gs_showNotes + '</i>';
           }
           if (gs_showRated !== '') {
-            var colorClass;
+            let colorClass;
             if (gs_showRated < 50) {colorClass = 'bg-warning';} else if (gs_showRated >= 50 && gs_showRated < 100) {colorClass = 'bg-success';} else if (gs_showRated === 100) {colorClass = 'bg-info';}
             skojPoints = '<hr class="m-1"><div class="progress"><div class="progress-bar ' + colorClass + '" role="progressbar" style="width: ' + gs_showRated + '%;" aria-valuenow="' + gs_showRated + '" aria-valuemin="0" aria-valuemax="100">Skojfaktor: ' + gs_showRated + '</div></div>';
           }
           if (gs_showQuotes !== '') {
-            var quotes;
-            var prev = '';
-            var next = '';
+            let quotes;
+            let prev = '';
+            let next = '';
             quotes = gs_showQuotes.split(';');
-            var item;
-            var allQuotes = '';
+            let item;
+            let allQuotes = '';
             $.each(quotes, function (i, quote) {
               if (i === 0) {
                 item = '<div class="carousel-item active" data-interval="4000">' + quote + '</div>';
@@ -331,10 +331,10 @@ function getXML(feedUrl) {
               }
               allQuotes = allQuotes + item;
             });
-            var inner = '<div class="carousel-inner">' + allQuotes + '</div>';
+            const inner = '<div class="carousel-inner">' + allQuotes + '</div>';
             carousel = '<hr class="m-1"><div id="quoteCarousel' + index + '" class="carousel slide" data-ride="carousel">' + inner + prev + next + '</div>';
           }
-          var date = new Date(title.pubDate).getFullYear() + '.' + getTwoDigits(new Date(title.pubDate).getMonth() + 1) + '.' + getTwoDigits(new Date(title.pubDate).getDate());
+          const date = new Date(title.pubDate).getFullYear() + '.' + getTwoDigits(new Date(title.pubDate).getMonth() + 1) + '.' + getTwoDigits(new Date(title.pubDate).getDate());
           $("#episodeList").prepend('<li href="#" data-index="' + index + '" class="list-group-item list-group-item-action d-block">' +
           '<a class="d-flex justify-content-between">' +
           '<span>' + title.title + '</span>' +
@@ -351,7 +351,7 @@ $.ajax({
   url: 'https://itunes.apple.com/lookup?id=1095020110&entity=podcast',
   cache: false,
   success: function(results) {
-    var data = JSON.parse(results);
+    const data = JSON.parse(results);
     getXML(data.results[0].feedUrl);
   },
   error: function(err) {
@@ -361,7 +361,7 @@ $.ajax({
 
 function filterFunction() {
   // Declare variables
-  var input, filter, ul, li, a, i, txtValue, searchFieldSelectVal;
+  let input, filter, ul, li, a, i, txtValue, searchFieldSelectVal;
   input = document.getElementById('searchInput');
   filter = input.value.toUpperCase();
   ul = document.getElementById("episodeList");
