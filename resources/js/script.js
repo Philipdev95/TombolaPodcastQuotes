@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 // Set IS_DEV if running locally
 window.IS_DEV = window.origin.includes('localhost') || window.origin.includes('127.0.0.1');
 
@@ -149,9 +151,9 @@ $(document).ready(() => {
   $.getJSON('../resources/json/quotes.json', quotes => {
     $.getJSON('../resources/json/config.json', config => {
       // Initialize Firebase
-      firebase.initializeApp(config);
+      firebase.initializeApp(config); // eslint-disable-line
 
-      dbRef = firebase.database();
+      dbRef = firebase.database(); // eslint-disable-line
 
       dbRef.ref('toplist').on('child_added', snapshot => {
         sortHighScore(snapshot.val());

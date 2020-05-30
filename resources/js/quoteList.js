@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 // Set IS_DEV if running locally
 window.IS_DEV = window.origin.includes('localhost') || window.origin.includes('127.0.0.1');
 
@@ -29,12 +31,13 @@ const displayQuotes = ({carl, marcus}) => {
 
 const fetchQuotes = () => {
   const url = window.IS_DEV ? `${window.origin}/resources/json/quotes.json` : '../json/quotes.json';
+  // eslint-disable-next-line
   return new Promise((resolve, _reject) =>
     $.getJSON(url, json => resolve(json)))
     .then(quotes => displayQuotes(quotes));
 };
 
 fetchQuotes()
-  .then(__ => {
+  .then(_ => { // eslint-disable-line
     hideLoadingSpinner();
   });

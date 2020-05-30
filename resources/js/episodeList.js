@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 // Set IS_DEV if running locally
 window.IS_DEV = window.origin.includes('localhost') || window.origin.includes('127.0.0.1');
 
@@ -75,6 +77,7 @@ const xmlToJson = xml => {
   return result;
 };
 
+// eslint-disable-next-line
 const filterSearch = () => {
   let episodeMatch;
   let match;
