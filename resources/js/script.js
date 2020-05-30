@@ -24,7 +24,14 @@ const sortHighScore = newScore => {
 };
 
 const getAllQuotes = () => {
-  $.getJSON('../json/quotes.json', ({carl, marcus}) => {
+  let url;
+  if (window.IS_DEV) {
+    url = `${window.origin}/resources/json/quotes.json`;
+  } else {
+    url = '../json/quotes.json';
+  }
+
+  $.getJSON(url, ({carl, marcus}) => {
     const cQuotes = carl.quotes;
     let i = 0;
     while (i < cQuotes.length) {
