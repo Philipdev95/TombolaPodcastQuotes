@@ -66,7 +66,7 @@ function getQuote(name){
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
   activeQuote = {
-    name: name,
+    name,
     quote: quote["quote"]
   }
 }
@@ -175,7 +175,7 @@ function saveHighscore() {
   const name = $("#add-form input").val();
 
   if ($.isNumeric(storedPoints)){
-    dbRef.ref("toplist/" + Date.now()).set({name: name, points: storedPoints});
+    dbRef.ref("toplist/" + Date.now()).set({name, points: storedPoints});
   }
 
 }
@@ -273,7 +273,7 @@ function getXML(feedUrl) {
     url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgkUq7i7Lz9yxAgpQQ84LdH3gB5_H23231r20_DxkeVK3jwYXN_-yGVXHwYv4ARz2qNU3Yga_T1qgv/pub?output=csv';
   }
   $.ajax({
-    url: url,
+    url,
     success: function (data) {
       ssArr = data.split("\n");
     }
