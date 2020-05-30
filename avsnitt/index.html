@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,76 +13,75 @@
 	<link rel="apple-touch-icon" href="../resources/img/logo.jpg">
 	<title>Tombola Podcast - Avsnitt</title>
 </head>
-
 <body>
-	<nav class="navbar navbar-expand-lg sticky-top navbar-light navbar-dark">
-		<a class="navbar-brand" href="/tombola-podcast/">
-			<img src="../resources/img/tombola-podcast-logo.png" height="40px" alt="logo">
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="text-lg-center collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-        <a class="col-12 col-lg-auto nav-item nav-link" href="/games/tombolacitat/">Vem sa vad?</a>
-				<a class="col-12 col-lg-auto nav-item nav-link" href="/games/tombolacitat/alla-citat">Alla citat</a>
-				<a class="col-12 col-lg-auto nav-item nav-link active" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="#">Alla avsnitt</a>
-				<div class="dropdown-divider"></div>
-				<a class="col-12 col-lg-auto nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">
-					<div>
-						<i class="fab fa-facebook-square" style="color:#3B5998"></i> Grupp
-					</div>
-				</a>
-				<a class="col-12 col-lg-auto nav-item nav-link" href="https://www.facebook.com/groups/160368417829277/">
-					<div>
-						<i class="fab fa-facebook-square" style="color:#3B5998"></i> Patreons Grupp
-					</div>
-				</a>
-				<a class="col-12 col-lg-auto nav-item nav-link" href="https://www.patreon.com/tombola/posts">
-					<div>
-						<i class="fab fa-patreon" style="color:#f96854"></i> Patreon
-					</div>
-				</a>
-				<div class="dropdown-divider"></div>
-				<button id="clear-points" type="button" class="col-10 offset-1 col-lg-auto btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT DIN DATA</button>
-
-				<div class="dropdown-divider"></div>
-				<small class="col-12 col-lg-auto text-center text-secondary">Cred: Philip de Vries & Oskar Emilsson</small>
-			</div>
-		</div>
-	</nav>
-	<div class="container">
-		<div class="row">
-      <div class="head bg-black col-12 text-center py-5">
-        <img src="/tombola-podcast/resources/img/tombola-all-episodes.png" height="80px" alt="logo">
-      </div>
-      <h2 class="col-12 mb-0">Sök igenom alla avsnitt!</h2>
-			<small class="col-12 pb-2">Datan som visas här hämtas från <a target="_blank" href="https://tombola.libsyn.com/">tombola.libsyn.com</a> & <a target="_blank" href="https://docs.google.com/spreadsheets/d/1qcxRpB8S6o0nLbVnj-HnaB0skSZXbvbiOthAEF9pLxM/edit?fbclid=IwAR0eek1O6krqA6RHUrQ5z74owJYBqGbPBUEJCpbFscZI1q7WBjfezvYbJLg#gid=0">excel-arket</a> som vi bygger tillsammans.</small>
-			<h4 class="col-12 text-danger status-message"></h4>
-      <div class="input-group mb-3 col-12">
-        <div class="input-group-prepend">
-					<select id="search-field-select" class="input-group-text form-control">
-            <option value="episode_title_numb_date">Titel, nummer och datum</option>
-            <option value="episode_comments">Kommentarer</option>
-          </select>
-          <!--<span class="input-group-text">Sök efter...</span>-->
-        </div>
-        <input id="searchInput" class="form-control" onkeyup="filterSearch()" type="text" placeholder="Sök..." aria-label="ämne">
-      </div>
-			<div class="col-12">
-				<div class="col-xs-1" align="center">
-					<div id="loading-spinner" class="lds-ripple"><div></div><div></div></div>
+<nav class="navbar navbar-expand-lg sticky-top navbar-light navbar-dark">
+	<a class="navbar-brand" href="/tombola-podcast/">
+		<img src="../resources/img/tombola-podcast-logo.png" height="40px" alt="logo">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="text-lg-center collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+			<a class="col-12 col-lg-auto nav-item nav-link" href="/games/tombolacitat/">Vem sa vad?</a>
+			<a class="col-12 col-lg-auto nav-item nav-link" href="/games/tombolacitat/alla-citat">Alla citat</a>
+			<a class="col-12 col-lg-auto nav-item nav-link active" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="#">Alla avsnitt</a>
+			<div class="dropdown-divider"></div>
+			<a class="col-12 col-lg-auto nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">
+				<div>
+					<i class="fab fa-facebook-square" style="color:#3B5998"></i> Grupp
 				</div>
-				<ul id="episodeList" class="list-group"></ul>
-			</div>
+			</a>
+			<a class="col-12 col-lg-auto nav-item nav-link" href="https://www.facebook.com/groups/160368417829277/">
+				<div>
+					<i class="fab fa-facebook-square" style="color:#3B5998"></i> Patreons Grupp
+				</div>
+			</a>
+			<a class="col-12 col-lg-auto nav-item nav-link" href="https://www.patreon.com/tombola/posts">
+				<div>
+					<i class="fab fa-patreon" style="color:#f96854"></i> Patreon
+				</div>
+			</a>
+			<div class="dropdown-divider"></div>
+			<button id="clear-points" type="button" class="col-10 offset-1 col-lg-auto btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT DIN DATA</button>
+			<div class="dropdown-divider"></div>
+			<small class="col-12 col-lg-auto text-center text-secondary">Cred: Philip de Vries & Oskar Emilsson</small>
 		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
-  <script src="../resources/js/episodeList.js"></script>
+</nav>
+<div class="container">
+	<div class="row">
+		<div class="head bg-black col-12 text-center py-5">
+			<img src="/tombola-podcast/resources/img/tombola-all-episodes.png" height="80px" alt="logo">
+		</div>
+		<h2 class="col-12 mb-0">Sök igenom alla avsnitt!</h2>
+		<small class="col-12 pb-2">Datan som visas här hämtas från <a target="_blank" href="https://tombola.libsyn.com/">tombola.libsyn.com</a> & <a target="_blank" href="https://docs.google.com/spreadsheets/d/1qcxRpB8S6o0nLbVnj-HnaB0skSZXbvbiOthAEF9pLxM/edit?fbclid=IwAR0eek1O6krqA6RHUrQ5z74owJYBqGbPBUEJCpbFscZI1q7WBjfezvYbJLg#gid=0">excel-arket</a> som vi bygger tillsammans.</small>
+		<h4 class="col-12 text-danger status-message"></h4>
+		<div class="input-group mb-3 col-12">
+			<div class="input-group-prepend">
+				<select id="search-field-select" class="input-group-text form-control">
+					<option value="episode_title_numb_date">Titel, nummer och datum</option>
+					<option value="episode_comments">Kommentarer</option>
+				</select>
+			</div>
+			<input id="searchInput" class="form-control" onkeyup="filterSearch()" type="text" placeholder="Sök..." aria-label="ämne">
+		</div>
+		<div class="col-12">
+			<div class="col-xs-1" align="center">
+				<div id="loading-spinner" class="lds-ripple">
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+			<ul id="episodeList" class="list-group"></ul>
+		</div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
+<script src="../resources/js/episodeList.js"></script>
 </body>
-
 </html>

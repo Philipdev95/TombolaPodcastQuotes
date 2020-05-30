@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,59 +14,55 @@
 	<link rel="apple-touch-icon" href="../resources/img/logo.jpg">
 	<title>Alla Citat | Tombola Podcast</title>
 </head>
-
 <body>
-	<nav class="navbar sticky-top navbar-light navbar-dark">
-		<a class="navbar-brand" href="../#">
-			<img src="../resources/img/logo1.png" height="40px" alt="logo">
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="text-lg-center collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-        <a class="nav-item nav-link" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="../#">Spela</a>
-        <a class="nav-item nav-link active" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="../alla-citat">Alla citat<span class="sr-only">(current)</span></a>
-				<div class="dropdown-divider"></div>
-				<a class="nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">
-					<div>
-						<i class="fab fa-facebook-square" style="color:#3B5998"></i> Tombola Grupp
-					</div>
-				</a>
-				<a class="nav-item nav-link" href="https://www.facebook.com/groups/160368417829277/">
-					<div>
-						<i class="fab fa-facebook-square" style="color:#3B5998"></i> Tombola Patreons Grupp
-					</div>
-				</a>
-				<a class="nav-item nav-link" href="https://www.patreon.com/tombola/posts">
-					<div>
-						<i class="fab fa-patreon" style="color:#f96854"></i> Tombola Patreon
-					</div>
-				</a>
-				<div class="dropdown-divider"></div>
-				<button id="clear-points" type="button" class="col-10 offset-1 col-lg-2 offset-lg-5 btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT DIN DATA</button>
-				<div class="dropdown-divider"></div>
-				<small class="col-12 text-center text-secondary">Cred: Philip de Vries & Oskar Emilsson</small>
-			</div>
+<nav class="navbar sticky-top navbar-light navbar-dark">
+	<a class="navbar-brand" href="../#">
+		<img src="../resources/img/logo1.png" height="40px" alt="logo">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="text-lg-center collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+			<a class="nav-item nav-link" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="../#">Spela</a>
+			<a class="nav-item nav-link active" data-toggle="collapse" data-target="#navbarNavAltMarkup" href="../alla-citat">Alla citat<span class="sr-only">(current)</span></a>
+			<div class="dropdown-divider"></div>
+			<a class="nav-item nav-link" href="https://www.facebook.com/groups/1422239974516417/">
+				<div>
+					<i class="fab fa-facebook-square" style="color:#3B5998"></i> Tombola Grupp
+				</div>
+			</a>
+			<a class="nav-item nav-link" href="https://www.facebook.com/groups/160368417829277/">
+				<div>
+					<i class="fab fa-facebook-square" style="color:#3B5998"></i> Tombola Patreons Grupp
+				</div>
+			</a>
+			<a class="nav-item nav-link" href="https://www.patreon.com/tombola/posts">
+				<div>
+					<i class="fab fa-patreon" style="color:#f96854"></i> Tombola Patreon
+				</div>
+			</a>
+			<div class="dropdown-divider"></div>
+			<button id="clear-points" type="button" class="col-10 offset-1 col-lg-2 offset-lg-5 btn-sm btn-outline-danger" data-toggle="collapse" data-target="#navbarNavAltMarkup">TA BORT DIN DATA</button>
+			<div class="dropdown-divider"></div>
+			<small class="col-12 text-center text-secondary">Cred: Philip de Vries & Oskar Emilsson</small>
 		</div>
-	</nav>
-	<div class="container p-3 text-center">
-		<button id="allQuotes" type="button" class="btn btn-outline-success my-2">Visa alla citat</button>
-    <h3 class="name nameCarl">Carls citat</h3>
-    <div id="quotesCarl">
-
-    </div>
-    <h3 class="name nameMarcus">Marcus citat</h3>
-    <div class="quotesMarcus">
-
-    </div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
-  <script src="../resources/js/script.js"></script>
+</nav>
+<div class="container p-3 text-center">
+	<button id="allQuotes" type="button" class="btn btn-outline-success my-2">Visa alla citat</button>
+	<h3 class="name nameCarl">Carls citat</h3>
+	<div id="quotesCarl">
+	</div>
+	<h3 class="name nameMarcus">Marcus citat</h3>
+	<div class="quotesMarcus">
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
+<script src="../resources/js/script.js"></script>
 </body>
-
 </html>
