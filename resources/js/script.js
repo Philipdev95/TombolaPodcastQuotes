@@ -27,13 +27,13 @@ function getAllQuotes(){
     const cQuotes = data.carl.quotes;
     let i = 0;
     while (i < cQuotes.length){
-      $("#quotesCarl").append("<p>" + cQuotes[i].quote + "</p>");
+      $("#quotesCarl").append(`<p>${cQuotes[i].quote}</p>`);
       i++;
     }
     const mQuotes = data.marcus.quotes;
     let x = 0;
     while (x < mQuotes.length){
-      $(".quotesMarcus").append("<p>" + mQuotes[x].quote + "</p>");
+      $(".quotesMarcus").append(`<p>${mQuotes[x].quote}</p>`);
       x++;
     }
   });
@@ -42,7 +42,7 @@ function getAllQuotes(){
 function getTwoDigits (number) {
   let newNumber;
   if (number < 10) {
-    newNumber = '0' + number;
+    newNumber = `0${number}`;
     return newNumber;
   } else {
     return number;
@@ -175,15 +175,15 @@ function saveHighscore() {
   const name = $("#add-form input").val();
 
   if ($.isNumeric(storedPoints)){
-    dbRef.ref("toplist/" + Date.now()).set({name, points: storedPoints});
+    dbRef.ref(`toplist/${Date.now()}`).set({name, points: storedPoints});
   }
 
 }
 /*-----------------*/
 function printHighscore() {
   highscore.forEach((score,i) => {
-    $("#toplist-" + i + " .name").text(score.name);
-    $("#toplist-" + i + " .points").text(score.points);
+    $(`#toplist-${i} .name`).text(score.name);
+    $(`#toplist-${i} .points`).text(score.points);
   });
 }
 /*-----------------*/
@@ -305,12 +305,12 @@ function getXML(feedUrl) {
         const gs_showQuotes = item[5];
         if (index !== 0) {
           if (item[4] !== '') {
-            showNotes = '<hr class="m-1"><i class="show-notes text-muted">' + gs_showNotes + '</i>';
+            showNotes = `<hr class="m-1"><i class="show-notes text-muted">${gs_showNotes}</i>`;
           }
           if (gs_showRated !== '') {
             let colorClass;
             if (gs_showRated < 50) {colorClass = 'bg-warning';} else if (gs_showRated >= 50 && gs_showRated < 100) {colorClass = 'bg-success';} else if (gs_showRated === 100) {colorClass = 'bg-info';}
-            skojPoints = '<hr class="m-1"><div class="progress"><div class="progress-bar ' + colorClass + '" role="progressbar" style="width: ' + gs_showRated + '%;" aria-valuenow="' + gs_showRated + '" aria-valuemin="0" aria-valuemax="100">Skojfaktor: ' + gs_showRated + '</div></div>';
+            skojPoints = `<hr class="m-1"><div class="progress"><div class="progress-bar ${colorClass}" role="progressbar" style="width: ${gs_showRated}%;" aria-valuenow="${gs_showRated}" aria-valuemin="0" aria-valuemax="100">Skojfaktor: ${gs_showRated}</div></div>`;
           }
           if (gs_showQuotes !== '') {
             let quotes;
@@ -321,23 +321,19 @@ function getXML(feedUrl) {
             let allQuotes = '';
             $.each(quotes, (i, quote) => {
               if (i === 0) {
-                item = '<div class="carousel-item active" data-interval="4000">' + quote + '</div>';
+                item = `<div class="carousel-item active" data-interval="4000">${quote}</div>`;
               } else {
-                item = '<div class="carousel-item" data-interval="4000">' + quote + '</div>';
-                prev = '<a class="carousel-control-prev" href="#quoteCarousel' + index + '" role="button" data-slide="prev"><i class="text-dark far fa-chevron-left"></i><span class="sr-only">Previous</span></a>';
-                next = '<a class="carousel-control-next" href="#quoteCarousel' + index + '" role="button" data-slide="next"><i class="text-dark far fa-chevron-right"></i><span class="sr-only">Next</span></a>';
+                item = `<div class="carousel-item" data-interval="4000">${quote}</div>`;
+                prev = `<a class="carousel-control-prev" href="#quoteCarousel${index}" role="button" data-slide="prev"><i class="text-dark far fa-chevron-left"></i><span class="sr-only">Previous</span></a>`;
+                next = `<a class="carousel-control-next" href="#quoteCarousel${index}" role="button" data-slide="next"><i class="text-dark far fa-chevron-right"></i><span class="sr-only">Next</span></a>`;
               }
               allQuotes = allQuotes + item;
             });
-            const inner = '<div class="carousel-inner">' + allQuotes + '</div>';
-            carousel = '<hr class="m-1"><div id="quoteCarousel' + index + '" class="carousel slide" data-ride="carousel">' + inner + prev + next + '</div>';
+            const inner = `<div class="carousel-inner">${allQuotes}</div>`;
+            carousel = `<hr class="m-1"><div id="quoteCarousel${index}" class="carousel slide" data-ride="carousel">${inner}${prev}${next}</div>`;
           }
-          const date = new Date(title.pubDate).getFullYear() + '.' + getTwoDigits(new Date(title.pubDate).getMonth() + 1) + '.' + getTwoDigits(new Date(title.pubDate).getDate());
-          $("#episodeList").prepend('<li href="#" data-index="' + index + '" class="list-group-item list-group-item-action d-block">' +
-          '<a class="d-flex justify-content-between">' +
-          '<span>' + title.title + '</span>' +
-          '<span>' + date + '</span>' + '</a>' + showNotes + skojPoints + carousel +
-          '</li>');
+          const date = `${new Date(title.pubDate).getFullYear()}.${getTwoDigits(new Date(title.pubDate).getMonth() + 1)}.${getTwoDigits(new Date(title.pubDate).getDate())}`;
+          $("#episodeList").prepend(`<li href="#" data-index="${index}" class="list-group-item list-group-item-action d-block"><a class="d-flex justify-content-between"><span>${title.title}</span><span>${date}</span></a>${showNotes}${skojPoints}${carousel}</li>`);
         }
         lastTitle = title.title;
       });
