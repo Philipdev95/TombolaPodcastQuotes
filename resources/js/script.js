@@ -15,14 +15,15 @@ let highscore = [];
 let firstGame = true;
 
 /*-----------------*/
-function sortHighScore(newScore) {
+const sortHighScore = newScore => {
   highscore.push(newScore);
 
   highscore = highscore.sort((obj1, obj2) => obj2.points - obj1.points);
   highscore = highscore.slice(0, 10);
   printHighscore();
-}
-function getAllQuotes() {
+};
+
+const getAllQuotes = () => {
   $.getJSON('../json/quotes.json', ({carl, marcus}) => {
     const cQuotes = carl.quotes;
     let i = 0;
@@ -37,18 +38,19 @@ function getAllQuotes() {
       x++;
     }
   });
-}
+};
 
-function getTwoDigits(number) {
+const getTwoDigits = number => {
   let newNumber;
   if (number < 10) {
     newNumber = `0${number}`;
     return newNumber;
   }
+
   return number;
-}
+};
 /*
-function getAllQuotes(){
+const getAllQuotes = () => {
   var Cquotes = allQuotes["carl"]["quotes"];
   var Mquotes = allQuotes["marcus"]["quotes"];
   $(".quotesCarl").append(Cquotes);
@@ -60,7 +62,7 @@ $('#allQuotes').click(() => {
   getAllQuotes();
 });
 /*-----------------*/
-function getQuote(name) {
+const getQuote = name => {
   const quotes = allQuotes[name].quotes;
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
@@ -68,14 +70,14 @@ function getQuote(name) {
     name,
     quote: quote.quote,
   };
-}
+};
 /*-----------------*/
-function printPoints() {
-  // function to print stored points
+const printPoints = () => {
+  // Print stored points
   $('#display-points').html(localStorage.getItem('storedPoints'));
-}
+};
 /*-----------------*/
-function addPoints() {
+const addPoints = () => {
   // checking if there are saved points in storage
   let storedPoints = parseInt(localStorage.getItem('storedPoints'), 10);
   if (!$.isNumeric(storedPoints)) {
@@ -87,22 +89,22 @@ function addPoints() {
     localStorage.setItem('storedPoints', storedPoints);
   }
   printPoints();
-}
+};
 /*-----------------*/
-function getPerson() {
+const getPerson = () => {
   // choosing from who you get the quote
   // if 1 choose carl
   if (Math.floor((Math.random() * 2))) {
     return 'carl';
   }
   return 'marcus';
-}
+};
 /*-----------------*/
-function printQuote() {
+const printQuote = () => {
   $('#quotes .quote-text').text(activeQuote.quote);
-}
+};
 /*-----------------*/
-function presentAnswer(guess) {
+const presentAnswer = guess => {
   // remove question and show result(right vs wrong)
   $('#question').addClass('hidden');
   $('#answer').removeClass('hidden');
@@ -114,9 +116,9 @@ function presentAnswer(guess) {
   } else {
     endGame();
   }
-}
+};
 /*-----------------*/
-function newQuote() {
+const newQuote = () => {
   // reset the visibility
   $('#question').removeClass('hidden');
   $('#answer').addClass('hidden');
@@ -128,9 +130,9 @@ function newQuote() {
 
   // present the quote
   printQuote();
-}
+};
 /*-----------------*/
-function startGame() {
+const startGame = () => {
   localStorage.setItem('storedPoints', 0);
   $('#end').addClass('hidden');
   // print new quote
@@ -151,9 +153,9 @@ function startGame() {
 
     firstGame = false;
   }
-}
+};
 /*----------------*/
-function endGame() {
+const endGame = () => {
   $('#question').addClass('hidden');
   $('#answer').addClass('hidden');
   $('#next-div').addClass('hidden');
@@ -164,9 +166,9 @@ function endGame() {
   if ($.isNumeric(storedPoints)) {
     $('#total-points span').text(storedPoints);
   }
-}
+};
 /*-----------------*/
-function saveHighscore() {
+const saveHighscore = () => {
   $('#add-form').addClass('hidden');
 
   const storedPoints = parseInt(localStorage.getItem('storedPoints'), 10);
@@ -175,14 +177,14 @@ function saveHighscore() {
   if ($.isNumeric(storedPoints)) {
     dbRef.ref(`toplist/${Date.now()}`).set({name, points: storedPoints});
   }
-}
+};
 /*-----------------*/
-function printHighscore() {
+const printHighscore = () => {
   highscore.forEach(({name, points}, i) => {
     $(`#toplist-${i} .name`).text(name);
     $(`#toplist-${i} .points`).text(points);
   });
-}
+};
 /*-----------------*/
 $(document).ready(() => {
   // get quotes
@@ -221,7 +223,7 @@ $(document).ready(() => {
   });
 });
 
-function xmlToJson(xml) {
+const xmlToJson = xml => {
   // Create the return object
   let obj = {};
 
@@ -259,8 +261,8 @@ function xmlToJson(xml) {
     }
   }
   return obj;
-}
-function getXML(feedUrl) {
+};
+const getXML = feedUrl => {
   let ssArr; let url;
   if (window.IS_DEV) {
     url = `${window.origin}/resources/mock/episodes-response.txt`;
@@ -269,7 +271,7 @@ function getXML(feedUrl) {
   }
   $.ajax({
     url,
-    success: function(data) {
+    success: data => {
       ssArr = data.split('\n');
     },
   });
@@ -277,10 +279,10 @@ function getXML(feedUrl) {
     type: 'GET',
     url: feedUrl,
     dataType: 'xml',
-    error: function(_response) {
+    error: _response => {
       console.log('Error: There was a problem processing your request, please refresh the browser and try again');
     },
-    success: function(response) {
+    success: response => {
       const XMLisJSON = xmlToJson(response);
       const titles = XMLisJSON.rss.channel.item.reverse();
       $.each(titles, (index, title) => {
@@ -331,21 +333,21 @@ function getXML(feedUrl) {
       });
     },
   });
-}
+};
 $.ajax({
   type: 'post',
   url: 'https://itunes.apple.com/lookup?id=1095020110&entity=podcast',
   cache: false,
-  success: function(results) {
+  success: results => {
     const data = JSON.parse(results);
     getXML(data.results[0].feedUrl);
   },
-  error: function({responseText}) {
+  error: ({responseText}) => {
     console.log(JSON.parse(responseText));
   },
 });
 
-function filterFunction() {
+const filterFunction = () => {
   // Declare variables
   let a; let txtValue;
   const input = document.getElementById('searchInput');
@@ -373,4 +375,4 @@ function filterFunction() {
       li[i].style.display = 'none';
     }
   }
-}
+};
