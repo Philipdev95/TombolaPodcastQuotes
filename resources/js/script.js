@@ -373,7 +373,7 @@ function filterFunction() {
     } else {
       txtValue = '';
     }
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    if (txtValue.toUpperCase().includes(filter)) {
       li[i].classList.add("d-block");
       li[i].style.display = "";
     } else {
