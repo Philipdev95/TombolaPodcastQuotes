@@ -18,9 +18,7 @@ let firstGame = true;
 function sortHighScore(newScore) {
   highscore.push(newScore);
 
-  highscore = highscore.sort((obj1, obj2) => {
-    return obj2.points - obj1.points;
-  });
+  highscore = highscore.sort((obj1, obj2) => obj2.points - obj1.points);
   highscore = highscore.slice(0, 10);
   printHighscore();
 }
