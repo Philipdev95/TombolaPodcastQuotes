@@ -60,6 +60,34 @@ const printQuote = () => {
   $('#quotes .quote-text').text(activeQuote.quote);
 };
 
+const newQuote = () => {
+  // reset the visibility
+  $('#question').removeClass('hidden');
+  $('#answer').addClass('hidden');
+  $('#next-div').addClass('hidden');
+  $('#correct-answer').addClass('hidden');
+
+  // get a quote from a random person
+  getQuote(getRandomPerson());
+
+  // present the quote
+  printQuote();
+};
+
+
+const endGame = () => {
+  $('#question').addClass('hidden');
+  $('#answer').addClass('hidden');
+  $('#next-div').addClass('hidden');
+  $('#end').removeClass('hidden');
+  $('#add-form').removeClass('hidden');
+
+  const storedPoints = parseInt(localStorage.getItem('storedPoints'), 10);
+  if ($.isNumeric(storedPoints)) {
+    $('#total-points span').text(storedPoints);
+  }
+};
+
 const presentAnswer = guess => {
   // remove question and show result(right vs wrong)
   $('#question').addClass('hidden');
@@ -73,20 +101,6 @@ const presentAnswer = guess => {
   } else {
     endGame();
   }
-};
-
-const newQuote = () => {
-  // reset the visibility
-  $('#question').removeClass('hidden');
-  $('#answer').addClass('hidden');
-  $('#next-div').addClass('hidden');
-  $('#correct-answer').addClass('hidden');
-
-  // get a quote from a random person
-  getQuote(getRandomPerson());
-
-  // present the quote
-  printQuote();
 };
 
 const startGame = () => {
@@ -109,19 +123,6 @@ const startGame = () => {
     });
 
     isFirstGame = false;
-  }
-};
-
-const endGame = () => {
-  $('#question').addClass('hidden');
-  $('#answer').addClass('hidden');
-  $('#next-div').addClass('hidden');
-  $('#end').removeClass('hidden');
-  $('#add-form').removeClass('hidden');
-
-  const storedPoints = parseInt(localStorage.getItem('storedPoints'), 10);
-  if ($.isNumeric(storedPoints)) {
-    $('#total-points span').text(storedPoints);
   }
 };
 
