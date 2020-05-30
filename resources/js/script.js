@@ -23,14 +23,14 @@ function sortHighScore(newScore) {
   printHighscore();
 }
 function getAllQuotes(){
-  $.getJSON("../json/quotes.json", data => {
-    const cQuotes = data.carl.quotes;
+  $.getJSON("../json/quotes.json", ({carl, marcus}) => {
+    const cQuotes = carl.quotes;
     let i = 0;
     while (i < cQuotes.length){
       $("#quotesCarl").append(`<p>${cQuotes[i].quote}</p>`);
       i++;
     }
-    const mQuotes = data.marcus.quotes;
+    const mQuotes = marcus.quotes;
     let x = 0;
     while (x < mQuotes.length){
       $(".quotesMarcus").append(`<p>${mQuotes[x].quote}</p>`);
@@ -141,9 +141,9 @@ function startGame(){
 
   if (firstGame) {
     //handler
-    $("#choice-div").click(event => {
-      if (event.target.classList.contains("person")) {
-        presentAnswer(event.target.getAttribute("id"));
+    $("#choice-div").click(({target}) => {
+      if (target.classList.contains("person")) {
+        presentAnswer(target.getAttribute("id"));
       }
     });
 
@@ -181,9 +181,9 @@ function saveHighscore() {
 }
 /*-----------------*/
 function printHighscore() {
-  highscore.forEach((score,i) => {
-    $(`#toplist-${i} .name`).text(score.name);
-    $(`#toplist-${i} .points`).text(score.points);
+  highscore.forEach(({name, points}, i) => {
+    $(`#toplist-${i} .name`).text(name);
+    $(`#toplist-${i} .points`).text(points);
   });
 }
 /*-----------------*/
@@ -348,8 +348,8 @@ $.ajax({
     const data = JSON.parse(results);
     getXML(data.results[0].feedUrl);
   },
-  error: function(err) {
-    console.log(JSON.parse(err.responseText));
+  error: function({responseText}) {
+    console.log(JSON.parse(responseText));
   }
 });
 
