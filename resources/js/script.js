@@ -12,7 +12,7 @@ let allQuotes = {};
 let activeQuote = {};
 let dbRef;
 let highscore = [];
-let firstGame = true;
+let isFirstGame = true;
 
 /*-----------------*/
 const sortHighScore = newScore => {
@@ -20,7 +20,6 @@ const sortHighScore = newScore => {
 
   highscore = highscore.sort((obj1, obj2) => obj2.points - obj1.points);
   highscore = highscore.slice(0, 10);
-  printHighscore();
 };
 
 const getAllQuotes = () => {
@@ -48,21 +47,12 @@ const getAllQuotes = () => {
 };
 
 const getTwoDigits = number => {
-  let newNumber;
   if (number < 10) {
-    newNumber = `0${number}`;
-    return newNumber;
+    return `0${number}`;
   }
 
   return number;
 };
-/*
-const getAllQuotes = () => {
-  var Cquotes = allQuotes["carl"]["quotes"];
-  var Mquotes = allQuotes["marcus"]["quotes"];
-  $(".quotesCarl").append(Cquotes);
-  $(".quotesMarcus").append(Mquotes);
-}q
 
 /*------*/
 $('#allQuotes').click(() => {
@@ -78,27 +68,27 @@ const getQuote = name => {
     quote: quote.quote,
   };
 };
+
 /*-----------------*/
 const printPoints = () => {
   // Print stored points
   $('#display-points').html(localStorage.getItem('storedPoints'));
 };
+
 /*-----------------*/
 const addPoints = () => {
   // checking if there are saved points in storage
   let storedPoints = parseInt(localStorage.getItem('storedPoints'), 10);
   if (!$.isNumeric(storedPoints)) {
-    storedPoints = 1;
-    localStorage.setItem('storedPoints', storedPoints);
+    localStorage.setItem('storedPoints', 1);
   } else {
     // get storedPoints and add too them.
-    storedPoints++;
-    localStorage.setItem('storedPoints', storedPoints);
+    localStorage.setItem('storedPoints', ++storedPoints);
   }
-  printPoints();
 };
+
 /*-----------------*/
-const getPerson = () => {
+const getRandomPerson = () => {
   // choosing from who you get the quote
   // if 1 choose carl
   if (Math.floor((Math.random() * 2))) {
@@ -106,10 +96,12 @@ const getPerson = () => {
   }
   return 'marcus';
 };
+
 /*-----------------*/
 const printQuote = () => {
   $('#quotes .quote-text').text(activeQuote.quote);
 };
+
 /*-----------------*/
 const presentAnswer = guess => {
   // remove question and show result(right vs wrong)
@@ -120,10 +112,12 @@ const presentAnswer = guess => {
   if (guess === activeQuote.name) {
     $('#correct-answer').removeClass('hidden');
     addPoints();
+    printPoints();
   } else {
     endGame();
   }
 };
+
 /*-----------------*/
 const newQuote = () => {
   // reset the visibility
@@ -132,12 +126,13 @@ const newQuote = () => {
   $('#next-div').addClass('hidden');
   $('#correct-answer').addClass('hidden');
 
-  // get a quote from a person
-  getQuote(getPerson());
+  // get a quote from a random person
+  getQuote(getRandomPerson());
 
   // present the quote
   printQuote();
 };
+
 /*-----------------*/
 const startGame = () => {
   localStorage.setItem('storedPoints', 0);
@@ -146,7 +141,7 @@ const startGame = () => {
   newQuote();
   printPoints();
 
-  if (firstGame) {
+  if (isFirstGame) {
     // handler
     $('#choice-div').click(({target}) => {
       if (target.classList.contains('person')) {
@@ -158,9 +153,10 @@ const startGame = () => {
       newQuote();
     });
 
-    firstGame = false;
+    isFirstGame = false;
   }
 };
+
 /*----------------*/
 const endGame = () => {
   $('#question').addClass('hidden');
@@ -174,6 +170,7 @@ const endGame = () => {
     $('#total-points span').text(storedPoints);
   }
 };
+
 /*-----------------*/
 const saveHighscore = () => {
   $('#add-form').addClass('hidden');
@@ -185,6 +182,7 @@ const saveHighscore = () => {
     dbRef.ref(`toplist/${Date.now()}`).set({name, points: storedPoints});
   }
 };
+
 /*-----------------*/
 const printHighscore = () => {
   highscore.forEach(({name, points}, i) => {
@@ -192,6 +190,7 @@ const printHighscore = () => {
     $(`#toplist-${i} .points`).text(points);
   });
 };
+
 /*-----------------*/
 $(document).ready(() => {
   // get quotes
@@ -204,6 +203,7 @@ $(document).ready(() => {
 
       dbRef.ref('toplist').on('child_added', snapshot => {
         sortHighScore(snapshot.val());
+        printHighscore();
       });
 
       allQuotes = quotes;
@@ -267,8 +267,10 @@ const xmlToJson = xml => {
       }
     }
   }
+
   return obj;
 };
+
 const getXML = feedUrl => {
   let ssArr; let url;
   if (window.IS_DEV) {
@@ -287,17 +289,19 @@ const getXML = feedUrl => {
     url: feedUrl,
     dataType: 'xml',
     error: _response => {
-      console.log('Error: There was a problem processing your request, please refresh the browser and try again');
+      console.error('Error: There was a problem processing your request, please refresh the browser and try again');
     },
     success: response => {
       const XMLisJSON = xmlToJson(response);
       const titles = XMLisJSON.rss.channel.item.reverse();
       $.each(titles, (index, title) => {
+        let statusMsg = $('.status-message');
+
         if (ssArr === undefined) {
-          $('.status-message').html('Något gick fel. Pröva att ladda om sidan. <button class="btn btn-sm" onClick="history.go(0);">Refresh Page</button>');
+          statusMsg.html('Något gick fel. Pröva att ladda om sidan. <button class="btn btn-sm" onClick="history.go(0);">Refresh Page</button>');
           return false;
         }
-        $('.status-message').html('');
+        statusMsg.html('');
 
         const item = ssArr[index].split(',');
         let showNotes = '';
@@ -341,6 +345,7 @@ const getXML = feedUrl => {
     },
   });
 };
+
 $.ajax({
   type: 'post',
   url: 'https://itunes.apple.com/lookup?id=1095020110&entity=podcast',
@@ -350,11 +355,11 @@ $.ajax({
     getXML(data.results[0].feedUrl);
   },
   error: ({responseText}) => {
-    console.log(JSON.parse(responseText));
+    console.error(JSON.parse(responseText));
   },
 });
 
-const filterFunction = () => {
+const filterSearch = () => {
   // Declare variables
   let a; let txtValue;
   const input = document.getElementById('searchInput');
