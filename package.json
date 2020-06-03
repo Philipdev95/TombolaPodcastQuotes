@@ -1,0 +1,32 @@
+{
+  "name": "tombola-podcast",
+  "keywords": ["tombola podcast"],
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "format": "eslint **/*.js --fix",
+    "lint": "eslint **/*.js",
+    "serve": "http-server"
+  },
+  "author": "Philip De Vries",
+  "contributors": [
+    "oskaremilsson",
+    "simeg"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Philipdev95/TombolaPodcastQuotes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Philipdev95/TombolaPodcastQuotes/issues"
+  },
+  "homepage": "http://philipdev.se/tombola-podcast/",
+  "dependencies": {},
+  "engines": {},
+  "devDependencies": {
+    "@spotify/eslint-config-base": "7.0.0",
+    "eslint": "7.1.0",
+    "http-server": "0.12.3"
+  }
+}
